@@ -1,8 +1,5 @@
-call plug#begin('~/.vim/plugged')
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+call plug#begin('~/.config/nvim/bundle')
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
@@ -11,8 +8,11 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'elmcast/elm-vim'
-Plug 'elixir-lang/vim-elixir'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'zchee/deoplete-jedi'
+Plug 'mattn/emmet-vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'Yggdroot/indentLine'
 " call PlugInstall to install new plugins
 call plug#end()
 
@@ -22,10 +22,16 @@ syntax on
 set number
 set relativenumber
 set incsearch
+set ignorecase
+set smartcase
 set nohlsearch
 set tabstop=4
+set softtabstop=0
 set shiftwidth=4
 set expandtab
+set nobackup
+set noswapfile
+set nowrap
 
 " preferences
 inoremap jk <ESC>
@@ -52,7 +58,7 @@ nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
 " different tab sizes for different filetypes
-autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+"autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 " plugin settings
 
@@ -75,13 +81,44 @@ colorscheme solarized
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeChDirMode=2
+let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__', 'node_modules']
+let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+let g:NERDTreeShowBookmarks=1
+let g:nerdtree_tabs_focus_on_files=1
+let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
+
 
 " Syntastic support c++11
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = ' -std=gnu++11'
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_aggregate_errors = 1
 
-" Syntastic elm support
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
 
 let g:elm_syntastic_show_warnings = 1
+
+" suggested syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" deoplete-go
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+
+" copy text to clipboard
+"set clipboard=unnamed
+
+" change trigger key for emmet
+" let g:user_emmet_leader_key='z'
+
+let g:polyglot_disabled = ['python']
+let python_highlight_all = 1
