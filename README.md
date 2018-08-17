@@ -1,1 +1,1 @@
-# My config files for tmux and neovim
+# My config files for tmux, neovim, vscode, and fish shell
