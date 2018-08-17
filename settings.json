@@ -1,0 +1,42 @@
+{
+  // Place your settings in this file to overwrite the default settings
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "k"],
+      "after": ["<esc>"]
+    }
+  ],
+  "window.zoomLevel": 0.75,
+  "editor.fontSize": 18,
+  "terminal.integrated.fontSize": 17,
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true
+  },
+  "[javascript]": {
+    "editor.tabSize": 2
+  },
+  "[typescriptreact]": {
+    "editor.tabSize": 2
+  },
+  "[typescript]": {
+    "editor.tabSize": 2
+  },
+  "[graphql]": {
+    "editor.tabSize": 2
+  },
+  "editor.minimap.enabled": false,
+  "explorer.confirmDragAndDrop": false,
+  "workbench.statusBar.feedback.visible": false,
+  "workbench.editor.labelFormat": "short",
+  "terminal.integrated.rendererType": "dom",
+  "emmet.excludeLanguages": ["typescript", "typescriptreact", "javascript"],
+  "terminal.integrated.shell.osx": "/usr/local/bin/fish",
+  "workbench.editor.showTabs": true,
+  "breadcrumbs.enabled": true
+}
